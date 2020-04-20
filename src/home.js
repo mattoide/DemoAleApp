@@ -80,7 +80,7 @@ export default class Home extends Component {
 
       <TouchableOpacity
           style={styles.button}
-        onPress={()=> console.log("as")}
+          onPress={()=> this.props.navigation.navigate('Search')}
       >
           
           <View style={styles.inlineIconText}>

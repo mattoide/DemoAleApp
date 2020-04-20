@@ -26,5 +26,12 @@ export const strings = {
     province:'PROVINCIA',
     zip:'CAP',
     category: 'CATEGORIA',
-    description:'DESCRIZIONE'
+    description:'DESCRIZIONE',
+
+    searchByPosition:'CERCA PER POSIZIONE',
+    searchByCity:'CERCA PER CITTA\'',
+    searchByKeyWord:'CERCA PER PAROLA CHIAVE',
+    searchTitle:'SELEZIONA UNO O PIU\' LUOGHI DOVE EFFETTUARE LA RICERCA CLICCANDO SULL\' ICONA',
+
+    search:'RICERCA'
 }
