@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     },
     loginMember:{
         position:'absolute',
-         top:13,
+         top:13, 
         left:24,
     },
     loginMemberText:{
@@ -121,7 +121,9 @@ const styles = StyleSheet.create({
 
     loginMemberBg:{
         width:150,
-        height:150
+        height:150,
+        shadowColor: "#000",
+
     },
     text:{
         textAlign:'center',

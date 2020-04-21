@@ -33,5 +33,9 @@ export const strings = {
     searchByKeyWord:'CERCA PER PAROLA CHIAVE',
     searchTitle:'SELEZIONA UNO O PIU\' LUOGHI DOVE EFFETTUARE LA RICERCA CLICCANDO SULL\' ICONA',
 
-    search:'RICERCA'
+    search:'RICERCA',
+    perfectSearch:'Affina ricerca',
+
+    callNow:'Chiama ora',
+    whatsapp: 'Invia un messaggio'
 }

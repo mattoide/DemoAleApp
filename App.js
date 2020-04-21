@@ -12,8 +12,10 @@ import Login from './src/login'
 import Register from './src/register'
 import RegisterCompany from './src/registerCompany'
 import Search from './src/search'
+import Found from './src/found'
 
- const baseUrl = "http://192.168.1.31:3000/";
+// const baseUrl = "http://192.168.1.31:3000/";
+const baseUrl = "http://51.210.7.170:3000/";
 
 export const apiUrl = {
     getCategorie: baseUrl + 'options/getCategorie',
@@ -34,6 +36,7 @@ function App() {
       <Stack.Screen name="Register" component={Register} options={{headerShown:false}}/>
       <Stack.Screen name="RegisterCompany" component={RegisterCompany} options={{headerShown:false}}/>
       <Stack.Screen name="Search" component={Search} options={{headerShown:false}}/>
+      <Stack.Screen name="Found" component={Found} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -64,7 +64,6 @@ export default class Search extends Component {
             })
             cat.push(element)
           });
-          console.log(cat)
 
           context.setState({ filtriDisponibili: { categorie: cat, prodotti: context.state.filtriDisponibili.prodotti, servizi: context.state.filtriDisponibili.servizi } });
           context.setState({ list: cat })
@@ -120,6 +119,46 @@ export default class Search extends Component {
       .catch(err => {
         console.log("error", err);
       });
+  }
+
+  cercaAziendaByCatProdServ(url, callback) {
+
+    fetchTimeout(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({ filtri: this.state.filtri })
+
+
+    }, 5000, 'Il server non risponde')
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('Status code not OK', res.status);
+        } else {
+          return res.json();
+        }
+      })
+      .then(json => {
+        callback(null, json, this);
+      })
+      .catch(err => {
+        console.log("error", err);
+      });
+  }
+
+  searchBy(){
+    this.cercaAziendaByCatProdServ(apiUrl.cercaAziendaByCatProdServ, function (err, res, context) {
+
+      if (err)
+        return console.log(err)
+
+        context.props.navigation.navigate('Found', {
+        res: res
+      });
+    })
   }
 
 
@@ -225,7 +264,7 @@ export default class Search extends Component {
 
         <TouchableOpacity
             style={styles.buttonSearch}
-        >
+            onPress={() => this.searchBy()}>
 
             <Text style={styles.textSearch}>{strings.search}</Text>
         </TouchableOpacity>
@@ -283,14 +322,14 @@ const styles = StyleSheet.create({
     },
     tetxOver:{
         position:'absolute',
-         top:105,
+         top:'85%',
         left:0,
         width:'105%'
     },
     checkOver:{
         position:'absolute',
-        top:5,
-        left:95
+        top:'4%',
+        left:'80%'
         },
     text:{
         textAlign:'center',
