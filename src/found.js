@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button, Modal, TouchableHighlight,ImageBackground, Image } from 'react-native';
-import { FlatGrid } from 'react-native-super-grid';
+import { StyleSheet, View, Text, TouchableOpacity,ImageBackground, Image, Linking, Alert  } from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
 
 import { SectionGrid } from 'react-native-super-grid';
@@ -91,6 +90,36 @@ export default class Found extends Component {
        
     }
 
+    sendWhatsappMessage(cel){
+      if(cel && cel != undefined){
+
+      Linking.canOpenURL(`whatsapp://send?text= &phone=${cel}`).then(supported => {
+
+     if (!supported) {
+      Alert.alert(
+        'Non hai whatsapp installato'
+      );
+
+    } else {
+      return Linking.openURL(`whatsapp://send?text= &phone=${cel}`)
+    }
+  })
+  .catch(err => Alert.alert('Errore: ', err));
+
+} else {
+  Alert.alert('Errore: nessun numero di telefono')
+}
+} 
+
+call(tel){
+
+  if(tel && tel != undefined)
+    Linking.openURL(`tel:${tel}`)
+  else 
+    Alert.alert('Errore: nessun numero di telefono')
+}
+    
+
     _renderItem = (item, index) =>{
  
       return (  
@@ -103,33 +132,39 @@ export default class Found extends Component {
                     source={require('./background/member_no_shadows.png')}
                 />
 
-        <Text style={styles.textName}>{item.nome}</Text>
-        <Text style={styles.textDescr}>Qui va la descrizione breve</Text>
+        <Text style={styles.textName}>{item.ragioneSociale}</Text>
+      <Text style={styles.textDescr}>{item.descrizione}</Text>
 
-        <View style={styles.inlineItem}>
-          <Text style={styles.textHour}>Aperto ora: 12:00 20:30</Text>
-          <Text style={styles.textWhere}>             {item.indirizzo}</Text>
+        <View>
+          <Text style={styles.textHour}>Aperto dalle {item.apertura} alle {item.chiusura}</Text>
+          <Text style={styles.textWhere}>{item.toponimo} {item.indirizzo} {item.civico}</Text>
         </View>
 
         <View style={[styles.inlineItem, {alignSelf:'center'}]}>
 
+      {item.tel? 
         <TouchableOpacity
           style={styles.button}
+          onPress={()=> {this.call(item.tel);}}
         >
           <View style={styles.inline}>
             <Ionicons name='ios-call' color={'white'} size={25}/>
             <Text style={styles.buttonText}>  {strings.callNow}</Text>
           </View>
         </TouchableOpacity>
+        : null}
 
+{item.cel? 
           <TouchableOpacity
             style={styles.button}
+            onPress={()=> {this.sendWhatsappMessage(item.cel);}}
           >
              <View style={styles.inline}>
               <MaterialCommunityIcons name='whatsapp' color={'white'} size={25}/>
               <Text style={styles.buttonText}>  {strings.whatsapp}</Text>
             </View>
           </TouchableOpacity>
+          : null}
 
           </View>
           </TouchableOpacity>
@@ -254,7 +289,7 @@ const styles = StyleSheet.create({
         },       
          textWhere:{
           color:'white',
-          fontSize:18,
+          fontSize:18,   
         },
         inline:{
             flexDirection:'row',

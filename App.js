@@ -14,8 +14,8 @@ import RegisterCompany from './src/registerCompany'
 import Search from './src/search'
 import Found from './src/found'
 
-// const baseUrl = "http://192.168.1.31:3000/";
-const baseUrl = "http://51.210.7.170:3000/";
+ const baseUrl = "http://192.168.1.31:3000/";
+//const baseUrl = "http://51.210.7.170:3000/";
 
 export const apiUrl = {
     getCategorie: baseUrl + 'options/getCategorie',
