@@ -49,12 +49,14 @@ export default class Search extends Component {
   componentDidMount() {
 
     this.getOptions(apiUrl.getCategorie, function (err, resp, context) {
+
+      console.log(resp)
         if (err)
           return console.log(err)
   
-        if (resp) {
+        if (resp.categorie) {
           let cat = []
-          resp.forEach(element => {
+          resp.categorie.forEach(element => {
             element.active = false;
 
             catImage.forEach(catImg => {
@@ -105,7 +107,7 @@ export default class Search extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-    }, 5000, 'Il server non risponde')
+    }, 50000, 'Il server non risponde')
       .then(res => {
         if (res.status !== 200) {
           throw new Error('Status code not OK', res.status);
@@ -122,7 +124,7 @@ export default class Search extends Component {
   }
 
   cercaAziendaByCatProdServ(url, callback) {
-
+console.log(JSON.stringify({ filtri: this.state.filtri }))
     fetchTimeout(url, {
       method: 'POST',
       headers: {
@@ -131,7 +133,6 @@ export default class Search extends Component {
       },
 
       body: JSON.stringify({ filtri: this.state.filtri })
-
 
     }, 5000, 'Il server non risponde')
       .then(res => {

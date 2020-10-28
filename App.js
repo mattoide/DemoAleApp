@@ -18,10 +18,10 @@ import Found from './src/found'
 //const baseUrl = "http://51.210.7.170:3000/";
 
 export const apiUrl = {
-    getCategorie: baseUrl + 'options/getCategorie',
-    getProdotti: baseUrl + 'options/getProdotti',
-    getServizi: baseUrl + 'options/getServizi',
-    cercaAziendaByCatProdServ: baseUrl + 'aziende/cercaAziendaByCatProdServ'
+    getCategorie: baseUrl + 'api/options/categorie',
+    getProdotti: baseUrl + 'api/options/prodotti',
+    getServizi: baseUrl + 'api/options/servizi',
+    cercaAziendaByCatProdServ: baseUrl + 'api/azienda/cercaByCatProdServ'
 }
 
 
